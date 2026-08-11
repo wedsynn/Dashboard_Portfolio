@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tech Stack Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#FEF2A0] text-[#1c1412] min-h-screen p-4 md:p-8 flex flex-col justify-between selection:bg-[#E98B50] selection:text-white">
+
+    <div class="max-w-7xl mx-auto w-full space-y-6">
+
+        <!-- Header Dashboard Bar -->
+        <header class="bg-[#F3CD97] border-2 border-[#1c1412] rounded-3xl p-6 md:p-8 shadow-[4px_4px_0px_#1c1412] flex flex-col md:flex-row justify-between items-start md:items-center gap-6 transition-all duration-300">
+            <div class="space-y-1">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1c1412] text-[#FEF2A0] text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-[#E98B50] animate-ping"></span>
+                    Portfolio & Skill Analytics
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-[#1c1412] tracking-tight">My Skill Dashboard</h1>
+                <p class="text-sm text-[#1c1412]/80 font-semibold">ภาพรวมทักษะความเชี่ยวชาญและเครื่องมือที่กำลังศึกษาพัฒนา</p>
+            </div>
+
+            <!-- Quick Metrics Cards -->
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <div class="flex-1 md:flex-none bg-[#FEF2A0] border-2 border-[#1c1412] px-5 py-3 rounded-2xl text-center shadow-[2px_2px_0px_#1c1412]">
+                    <span class="block text-xs font-bold text-[#1c1412]/70">Completed Skills</span>
+                    <span id="completed-count" class="text-2xl font-extrabold text-[#1c1412]">0</span>
+                </div>
+                <div class="flex-1 md:flex-none bg-[#BC4F4F] text-white border-2 border-[#1c1412] px-5 py-3 rounded-2xl text-center shadow-[2px_2px_0px_#1c1412]">
+                    <span class="block text-xs font-bold text-white/90">In Progress</span>
+                    <span id="learning-count" class="text-2xl font-extrabold">1</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Bento Grid Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- Left Box: Currently Learning (PySpark) -->
+            <section class="lg:col-span-5 bg-[#F3CD97] border-2 border-[#1c1412] rounded-3xl p-6 md:p-8 shadow-[4px_4px_0px_#1c1412] flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-lg font-extrabold text-[#1c1412] flex items-center gap-2.5">
+                            <span class="w-8 h-8 rounded-xl bg-[#1c1412] text-[#FEF2A0] flex items-center justify-center text-sm border border-[#1c1412]">⚡</span> 
+                            กำลังศึกษาอยู่
+                        </h2>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#BC4F4F] text-white border border-[#1c1412] shadow-[1px_1px_0px_#1c1412]">
+                            Active Learning
+                        </span>
+                    </div>
+
+                    <!-- Dynamic Injected Learning Item -->
+                    <div id="learning-container" class="space-y-4">
+                        <!-- Rendered by main.js -->
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-4 border-t-2 border-[#1c1412]/20 flex items-center gap-3 text-xs font-bold text-[#1c1412]">
+                    <span class="text-base">💡</span>
+                    <span>เป้าหมายยกระดับทักษะสู่ระดับโปรดักชันจริง</span>
+                </div>
+            </section>
+
+            <!-- Right Box: Completed Tech Stack (Horizontal Cards Grid) -->
+            <section class="lg:col-span-7 bg-[#F3CD97] border-2 border-[#1c1412] rounded-3xl p-6 md:p-8 shadow-[4px_4px_0px_#1c1412]">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-lg font-extrabold text-[#1c1412] flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-xl bg-[#1c1412] text-[#FEF2A0] flex items-center justify-center text-sm border border-[#1c1412]">🎯</span> 
+                        ทักษะที่เรียนรู้แล้ว (Completed Stack)
+                    </h2>
+                </div>
+
+                <!-- Dynamic Injected Completed Stack Grid -->
+                <div id="completed-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Rendered by main.js -->
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-xs font-bold text-[#1c1412]/80 mt-12 border-t-2 border-[#1c1412]/20">
+        <p>© 2026 Portfolio Dashboard • Million-Dollar Crafted Style 🚀</p>
+    </footer>
+
+    <!-- Main JS Link -->
+    <script src="main.js"></script>
+</body>
+</html>
