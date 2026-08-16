@@ -1,0 +1,10 @@
+1. กำลังศึกษา
+1.1 React | Front-end Development | กำลังศึกษาการสร้าง UI ด้วย Components, Hooks และการจัดการ State | ⚛️
+
+2. เรียนรู้แล้ว
+2.1 SQL | Database Query | Advanced querying, joins, and performance tuning | SQL
+2.2 MongoDB | NoSQL Database | Document database design and aggregation pipelines | MDB
+2.3 PostgreSQL | Relational DB | Relational schema design, indexes, and complex queries | PGS
+2.4 Power BI | Data Visualization | DAX modeling, ETL with Power Query, and interactive dashboards | PBI
+2.5 Git / GitHub | Version Control | Repository management, branching workflows, and collaboration | GIT
+2.6 PySpark | Big Data Processing | โฟกัสหลักในกระบวนการประมวลผลข้อมูลขนาดใหญ่และ Distributed Computing | 🚀
