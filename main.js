@@ -1,67 +1,37 @@
-const skillsData = {
-    inProgress: [
-        {
-            name: "React", // เปลี่ยนจาก PySpark เป็น React
-            category: "Front-end Development",
-            desc: "กำลังศึกษาการสร้าง UI ด้วย Components, Hooks และการจัดการ State",
-            icon: "⚛️", // หรือไอคอนที่คุณชอบ
-            badge: "Learning",
-            level: "Intermediate"
-        }
-    ],
-    completed: [
-        {
-            name: "SQL",
-            category: "Database Query",
-            desc: "Advanced querying, joins, and performance tuning.",
-            icon: "SQL",
-            status: "Done",
-            level: "Proficient"
-        },
-        {
-            name: "MongoDB",
-            category: "NoSQL Database",
-            desc: "Document database design and aggregation pipelines.",
-            icon: "MDB",
-            status: "Done",
-            level: "Intermediate"
-        },
-        {
-            name: "PostgreSQL",
-            category: "Relational DB",
-            desc: "Relational schema design, indexes, and complex queries.",
-            icon: "PGS",
-            status: "Done",
-            level: "Proficient"
-        },
-        {
-            name: "Power BI",
-            category: "Data Visualization",
-            desc: "DAX modeling, ETL with Power Query, and interactive dashboards.",
-            icon: "PBI",
-            status: "Done",
-            level: "Advanced"
-        },
-        {
-            name: "Git / GitHub",
-            category: "Version Control",
-            desc: "Repository management, branching workflows, and collaboration.",
-            icon: "GIT",
-            status: "Done",
-            level: "Proficient"
-        },
-         {
-            name: "PySpark",
-            category: "Big Data Processing",
-            desc: "โฟกัสหลักในกระบวนการประมวลผลข้อมูลขนาดใหญ่และ Distributed Computing",
-            icon: "🚀",
-            badge: "Learning",
-            level: "Intermediate (กำลังลุยเข้มข้น)"
-        }
-    ]
-};
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        // 1. ดึงข้อมูลจากไฟล์ portfolio_tools.txt
+        const response = await fetch('portfolio_tools.txt');
+        const text = await response.text();
+        const data = { inProgress: [], completed: [] };
 
-document.addEventListener("DOMContentLoaded", () => {
+        const lines = text.split('\n');
+        lines.forEach(line => {
+            line = line.trim();
+            // ถ้าขึ้นต้นด้วย 1.1... แปลว่ากำลังเรียน
+            if (line.startsWith('1.1')) {
+                const parts = line.replace('1.1', '').split('|').map(s => s.trim());
+                if (parts.length >= 4) {
+                    data.inProgress.push({ name: parts[0], category: parts[1], desc: parts[2], icon: parts[3] });
+                }
+            }
+            // ถ้าขึ้นต้นด้วย 2.x... แปลว่าเรียนจบแล้ว
+            else if (line.startsWith('2.')) {
+                const parts = line.replace(/2\.\d+/, '').split('|').map(s => s.trim());
+                if (parts.length >= 4) {
+                    data.completed.push({ name: parts[0], category: parts[1], desc: parts[2], icon: parts[3], status: "Done" });
+                }
+            }
+        });
+
+        // 2. เรียกฟังก์ชันเรนเดอร์หลังจากได้ข้อมูลแล้ว
+        initDashboard(data);
+    } catch (err) {
+        console.error("Error loading portfolio_tools.txt:", err);
+    }
+});
+
+function initDashboard(skillsData) {
     // 1. ลูกเล่นทักทายตามช่วงเวลาบน Dashboard Header
     const hour = new Date().getHours();
     let greeting = "Welcome to My Dashboard";
@@ -74,7 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Animate Counter ตัวเลขสถิติแบบสมูท
     animateCounter("completed-count", skillsData.completed.length, " Tools");
-    document.getElementById("learning-count").textContent = `1 (PySpark)`;
+    const learningName = skillsData.inProgress[0]?.name || 'Loading';
+    document.getElementById("learning-count").textContent = `1 (${learningName})`;
 
     // 3. เรนเดอร์ส่วน กำลังศึกษาอยู่ (In Progress)
     const learningContainer = document.getElementById("learning-container");
@@ -113,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </span>
         </div>
     `).join('');
-});
+}
 
 // ฟังก์ชันช่วยรันตัวเลขนับเพิ่มขึ้นตอนโหลดหน้าเว็บ
 function animateCounter(elementId, targetValue, suffix) {
