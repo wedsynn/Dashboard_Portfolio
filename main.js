@@ -1,35 +1,39 @@
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-        // 1. ดึงข้อมูลจากไฟล์ portfolio_tools.txt
         const response = await fetch('portfolio_tools.txt');
         const text = await response.text();
         const data = { inProgress: [], completed: [] };
 
-        const lines = text.split('\n');
+        // ตัด \r ออกเผื่อไฟล์รันบน Windows (CRLF)
+        const cleanText = text.replace(/\r/g, '');
+        const lines = cleanText.split('\n');
+
         lines.forEach(line => {
             line = line.trim();
-            // ถ้าขึ้นต้นด้วย 1.1... แปลว่ากำลังเรียน
+            
+            // เช็คบรรทัดกำลังเรียน (ขึ้นต้นด้วย 1.1)
             if (line.startsWith('1.1')) {
                 const parts = line.replace('1.1', '').split('|').map(s => s.trim());
                 if (parts.length >= 4) {
                     data.inProgress.push({ name: parts[0], category: parts[1], desc: parts[2], icon: parts[3] });
                 }
             }
-            // ถ้าขึ้นต้นด้วย 2.x... แปลว่าเรียนจบแล้ว
-            else if (line.startsWith('2.')) {
-                const parts = line.replace(/2\.\d+/, '').split('|').map(s => s.trim());
+            // เช็คบรรทัดเรียนจบแล้ว (ขึ้นต้นด้วย 2. ตามด้วยตัวเลข เช่น 2.1, 2.2)
+            else if (/^2\.\d+/.test(line)) {
+                const parts = line.replace(/^2\.\d+/, '').split('|').map(s => s.trim());
                 if (parts.length >= 4) {
                     data.completed.push({ name: parts[0], category: parts[1], desc: parts[2], icon: parts[3], status: "Done" });
                 }
             }
         });
 
-        // 2. เรียกฟังก์ชันเรนเดอร์หลังจากได้ข้อมูลแล้ว
         initDashboard(data);
     } catch (err) {
         console.error("Error loading portfolio_tools.txt:", err);
     }
 });
+
+
 
 function initDashboard(skillsData) {
     // 1. ลูกเล่นทักทายตามช่วงเวลาบน Dashboard Header
