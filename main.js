@@ -1,12 +1,12 @@
 const skillsData = {
     inProgress: [
         {
-            name: "PySpark",
-            category: "Big Data Processing",
-            desc: "โฟกัสหลักในกระบวนการประมวลผลข้อมูลขนาดใหญ่และ Distributed Computing",
-            icon: "🚀",
+            name: "React", // เปลี่ยนจาก PySpark เป็น React
+            category: "Front-end Development",
+            desc: "กำลังศึกษาการสร้าง UI ด้วย Components, Hooks และการจัดการ State",
+            icon: "⚛️", // หรือไอคอนที่คุณชอบ
             badge: "Learning",
-            level: "Intermediate (กำลังลุยเข้มข้น)"
+            level: "Intermediate"
         }
     ],
     completed: [
@@ -49,6 +49,14 @@ const skillsData = {
             icon: "GIT",
             status: "Done",
             level: "Proficient"
+        },
+         {
+            name: "PySpark",
+            category: "Big Data Processing",
+            desc: "โฟกัสหลักในกระบวนการประมวลผลข้อมูลขนาดใหญ่และ Distributed Computing",
+            icon: "🚀",
+            badge: "Learning",
+            level: "Intermediate (กำลังลุยเข้มข้น)"
         }
     ]
 };
